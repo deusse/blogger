@@ -9,12 +9,15 @@
 
 <p>
 	<% unless @article.image.blank? %>
-		<%= image_tag @article.image.url %>
+		<%= image_tag @article.image.url(:medium) %>
 	<% end %>
 </p>
 <p><%= @article.body %></p>
-<p><%= link_to "Edit", edit_article_path(@article) %> |
-<%= link_to "Delete", article_path(@article), method: :delete, confirm: "Really delete the article?" %></p>
+
+<% if logged_in? %>
+	<p><%= link_to "Edit", edit_article_path(@article) %> |
+	<%= link_to "Delete", article_path(@article), method: :delete, confirm: "Really delete the article?" %></p>
+<% end %>
 
 <h3>Comments (<%= @article.comments.size %>)</h3>
 
